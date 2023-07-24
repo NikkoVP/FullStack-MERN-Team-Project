@@ -27,7 +27,7 @@ function Login() {
 Welcome To Wanderlist ! <br />
 Start Planning Your Day.
         </h1>
- 
+ {/*  */}
     </div>
   
 </div>
