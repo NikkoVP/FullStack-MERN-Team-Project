@@ -7,13 +7,14 @@ const router = express.Router();
 // GET /todos
 router.get('/', async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find().sort({ time: 1 }); // Sort the Todo items by time in ascending order
     res.json(todos);
   } catch (error) {
     console.error('Error fetching todos:', error);
     res.status(500).json({ message: 'Unable to fetch todos' });
   }
 });
+
 
 // POST /todos
 router.post('/', async (req, res) => {
