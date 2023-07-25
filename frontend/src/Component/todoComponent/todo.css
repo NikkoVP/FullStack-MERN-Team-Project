@@ -1,0 +1,19 @@
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-time {
+  flex: 1;
+}
+
+.todo-task {
+  flex: 2;
+}
