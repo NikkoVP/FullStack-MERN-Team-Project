@@ -64,21 +64,22 @@ function HomePage() {
               <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
               <br />
               <br />
-              <button type="submit">Submit</button>
+              <button type="submit" id={style.buttonSubmit}>Submit</button>
+              
             </div>
           </form>
           </div>
         </div>
 
         <div id={style.line}></div>
-        {/* List of API  */}
+        {/* List  of  API  */}
         <div id={style.list}>
           <h1>List of Schedule</h1>
           <div id={style.yourPlace}>
-            <h2>PLaceHere</h2>
-            <h3>
+            <h1>PLaceHere</h1>
+            <h2>
               Date:
-              </h3>
+              </h2>
               <h2> 2023-07-05 from 2023-07-17</h2>
                <br />
             <div id={style.seeMore}>

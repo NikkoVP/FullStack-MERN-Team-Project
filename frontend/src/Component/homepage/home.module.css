@@ -2,10 +2,11 @@
 @media (min-width:320px) {
     body {
         background-color: #ffffff;
- -webkit-text-size-adjust: 100%;
- font: 12px/30px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
-        
-    }
+
+ /* font: 12px/30px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif; */
+ font-family: 'Inter', sans-serif;
+color: #050f06;
+ }
 #header {
    opacity: 0;
 }
@@ -54,14 +55,38 @@ background-color: #7dd4b0;
 }
 #link {
     text-decoration: none;
-color: black;
+color: #050f06;
     font-size: 55px;
 }
 #link:hover {
-    color: #919191;
-    transition: .5s;
+position: relative;
+top: -3px;
+background-color: #fff;
+  border-radius: 13px;
+    transition: 1.5s;
 }
+#buttonSubmit {
+    background-color: #bee6e9;
+    height: 5vh;
+    margin: 5px;
+    text-transform: uppercase;
+    width: 70%;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 1px solid #bee6e9;;
+    
 }
+#buttonSubmit:hover {
+
+transition: 3s;
+position: relative;
+bottom: 15px;
+}
+
+}
+/* PC ViEW */
+
+
 
 @media (min-width:1200px) {
 
@@ -101,5 +126,21 @@ color: black;
     width:55%;
     left: 105px;
     }
+#buttonSubmit {
+    background-color: #bee6e9;
+    height: 5vh;
+    margin: 5px;
+    text-transform: uppercase;
+    width: 5vw;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 1px solid #bee6e9;;
+    
+}
+#buttonSubmit:hover {
 
+transition: 1.5s;
+position: relative;
+bottom: 5px;
+}
 }

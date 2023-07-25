@@ -45,14 +45,14 @@ else {
   <input type="Username" id="userName" placeholder="username" onChange={(e) => setuserName(e.target.value)} ></input>
   <br />{emailLength?<span>Username should be atleast length of 6 character</span>:null}
   <br />
-  <br />
+  
   <input type="email"  placeholder="email" onChange={(e) => setEmail(e.target.value)} required ></input>
   <br/>
   <br />
-  <br />
+ 
   <input type="password"   placeholder="password" onChange={(e)=> setPassword(e.target.value)} ></input>
   <br /> {passwordLength?<span>Password should be atleast of 6 character</span>:null}
-  <br />
+
   <br />
   <button type ='submit'id= {style.buttonSignUp}>SignUp</button>
   <div id={style.line}></div>
