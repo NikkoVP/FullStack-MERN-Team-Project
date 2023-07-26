@@ -1,132 +1,124 @@
+@media (min-width: 320px) {
+  body {
+    background-color: #ffffff;
 
-@media (min-width:320px) {
-    body {
-        background-color: #ffffff;
-
- /* font: 12px/30px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif; */
- font-family: 'Inter', sans-serif;
-color: #050f06;
- }
-#header {
-   opacity: 0;
-}
-#container{
-display: grid;
-place-items: center;
-}
-#addPlace {
-    display:flex;
+    /* font: 12px/30px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif; */
+    font-family: "Inter", sans-serif;
+    color: #050f06;
+  }
+  #header {
+    opacity: 0;
+  }
+  #container {
+    display: grid;
+    place-items: center;
+  }
+  #addPlace {
+    display: flex;
     justify-content: center;
     align-items: center;
-}
-#form {
+  }
+  #form {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-#list {
-  margin: 5px;
-  text-align: center;
-  width: 88%;
-}
-#yourPlace {
-box-shadow: 5px 5px 5px #919191;
+  }
+  #list {
+    margin: 25px;
+    text-align: center;
+    width: 88%;
+   
+  }
+  #yourPlace {
+    box-shadow: 5px 5px 5px #919191;
     padding: 5px;
     border-radius: 10px;
     border: 1px solid black;
     width: 100%;
     display: grid;
     place-items: center;
-}
-h2 {
+  }
+  h2 {
     text-align: center;
-}
-#line {
+  }
+  #line {
     width: 100%;
     border: 1px solid black;
     margin: 5px;
-}
-#seeMore{
-border: 1px solid black ;
-border-radius: 2px;
-width: 100%;
-background-color: #7dd4b0;
-}
-#link {
+  }
+  #seeMore {
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 100%;
+    background-color: #7dd4b0;
+  }
+  #link {
     text-decoration: none;
-color: #050f06;
+    color: #050f06;
     font-size: 55px;
-}
-#link:hover {
-position: relative;
-top: -3px;
-background-color: #fff;
-  border-radius: 13px;
+  }
+  #link:hover {
+    position: relative;
+    top: -3px;
+    background-color: #fff;
+    border-radius: 13px;
     transition: 1.5s;
-}
-#buttonSubmit {
-    background-color: #bee6e9;
+  }
+  #buttonSubmit {
+    background-color: #2cc686;
     height: 5vh;
     margin: 5px;
     text-transform: uppercase;
     width: 70%;
     border-radius: 5px;
     font-size: 15px;
-    border: 1px solid #bee6e9;;
-    
-}
-#buttonSubmit:hover {
-
-transition: 3s;
-position: relative;
-bottom: 15px;
-}
-
+    color: #f3f3f3;
+    border: 1px solid black;
+  }
+  #buttonSubmit:hover {
+    transition: 3s;
+    position: relative;
+    bottom: 15px;
+  }
 }
 /* PC ViEW */
 
+@media (min-width: 1200px) {
+  #header {
+    opacity: 1;
+    width: 95%;
+    box-shadow: 2px 2px 2px #919191;
+    height: 50px;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    margin: 35px;
+  }
+  #container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    background-color: #ffffff;
+  }
 
-
-@media (min-width:1200px) {
-
-    #header {
-        opacity: 1;
-        width: 95%;
-        box-shadow: 2px 2px 2px #919191;
-        height: 50px;
-        font-size: 35px;
-        display:flex;
-        align-items: center;
-        margin: 35px;
-    }
-    #container {
- display: flex;
- justify-content: space-around;
- flex-direction: row-reverse;
- background-color: #ffffff;
-
-    }
-
-    #form {
-       
-        justify-content: center;
-        align-items: center;
-      width:480px;
-  background-color: #fafafa;
-  position: relative;
-  right: 55px;
-
-    }
-    #line {
-        opacity: 0;
-    }
-    #list {
+  #form {
+    justify-content: center;
+    align-items: center;
+    width: 480px;
+    background-color: #fafafa;
+    position: relative;
+    right: 55px;
+  }
+  #line {
+    opacity: 0;
+  }
+  #list {
     position: absolute;
-    width:55%;
-    left: 105px;
-    }
-#buttonSubmit {
+    width: 45%;
+    left: 140px;
+  }
+  #buttonSubmit {
     background-color: #bee6e9;
     height: 5vh;
     margin: 5px;
@@ -134,13 +126,13 @@ bottom: 15px;
     width: 5vw;
     border-radius: 5px;
     font-size: 15px;
-    border: 1px solid #bee6e9;;
-    
-}
-#buttonSubmit:hover {
+    border: 1px solid #bee6e9;
 
-transition: 1.5s;
-position: relative;
-bottom: 5px;
-}
+    color: #050f06;
+  }
+  #buttonSubmit:hover {
+    transition: 1.5s;
+    position: relative;
+    bottom: 5px;
+  }
 }
