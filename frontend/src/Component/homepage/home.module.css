@@ -82,7 +82,7 @@
     bottom: 15px;
   }
 }
-/* PC ViEW */
+/*   PC    ViEW */
 
 @media (min-width: 1200px) {
   #header {
@@ -94,6 +94,9 @@
     display: flex;
     align-items: center;
     margin: 35px;
+    background-image: url('/images/background.png');
+    background-size: cover;
+    background-position: left;
   }
   #container {
     display: flex;
