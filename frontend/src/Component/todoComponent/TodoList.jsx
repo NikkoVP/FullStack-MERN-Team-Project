@@ -1,17 +1,27 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Todo from './Todo.jsx';
+import './todoList.css'
 
-const TodoList = () => {
+const TodoList = ({ userID, place, day }) => {
   const [todos, setTodos] = useState([]);
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [newTodoTask, setNewTodoTask] = useState('');
   const [newTodoTime, setNewTodoTime] = useState('');
 
+  // const [newTodoUserID, setNewTodoUserID] = useState('');
+  // const [newTodoPlace, setNewTodoPlace] = useState('');
+  // const [newTodoDay, setNewTodoDay] = useState('');
+
+  // setNewTodoUserID(userID);
+  // setNewTodoPlace(place);
+  // setNewTodoDay(day);
+
   useEffect(() => {
-    // Fetch the Todo records from the database
+    // Fetch the Todo records from the database based on userID, place, and day
     const fetchTodos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/todos');
+        const response = await fetch(`http://localhost:3000/todos?userID=${userID}&place=${place}&day=${day}`);
         if (response.ok) {
           const todosData = await response.json();
           setTodos(todosData);
@@ -24,7 +34,7 @@ const TodoList = () => {
     };
 
     fetchTodos();
-  }, []);
+  }, [userID, place, day]);
 
   const handleDelete = async (_id) => {
     // Make API request to delete the todo with the given ID
@@ -47,6 +57,12 @@ const TodoList = () => {
 
   const handleConfirmAddTodo = async () => {
     try {
+
+      // Validate the newTodoTime to ensure it's not empty
+      if (!newTodoTime) {
+        alert('Please select a time for the todo.');
+        return;
+      }
       // Convert the selected time to the desired format (HH:mm AM/PM)
       const timeParts = newTodoTime.split(':');
       const hours = parseInt(timeParts[0], 10);
@@ -54,6 +70,7 @@ const TodoList = () => {
       const amPm = hours >= 12 ? 'PM' : 'AM';
       const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
       const formattedTime = `${formattedHours}:${minutes.toString().padStart(2, '0')} ${amPm}`;
+
 
 
     
@@ -66,6 +83,9 @@ const TodoList = () => {
         body: JSON.stringify({
           task: newTodoTask,
           time: formattedTime,
+          userID: userID, // Use the passed userID
+          place: place, // Use the passed place
+          day: day, // Use the passed day
         }),
       });
 
@@ -115,18 +135,19 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      <h2>Activities</h2>
+    <div className="todo-list-container">
+      <h2 className="todo-list-heading">Activities</h2>
 
       {todos.length > 0 ? (
-        <Todo todos={todos} onDelete={handleDelete} onUpdate={handleUpdate} />
+        <Todo todos={todos} onDelete={handleDelete} onUpdate={handleUpdate} userID={userID} place={place} day={day}/>
       ) : (
         <p>No todos found.</p>
       )}
 
       {showAddTodo ? (
-        <div>
+        <div className="add-todo-container">
           <select
+           // className=''
             value={newTodoTime}
             onChange={(e) => setNewTodoTime(e.target.value)}
             placeholder="Time">
@@ -184,5 +205,13 @@ const TodoList = () => {
     </div>
   );
 };
+
+TodoList.propTypes = {
+
+  userID: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  day: PropTypes.number.isRequired,
+};
+
 
 export default TodoList;

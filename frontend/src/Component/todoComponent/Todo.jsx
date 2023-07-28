@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './todo.css';
 
-const Todo = ({ todos, onDelete, onUpdate }) => {
+const Todo = ({ todos, onDelete, onUpdate,}) => {
   const handleToggle = async (_id) => {
     try {
       const updatedTodos = todos.map((todo) => {
@@ -33,35 +33,21 @@ const Todo = ({ todos, onDelete, onUpdate }) => {
     await onDelete(_id);
   };
 
-  // return (
-  //   <ul>
-  //     {todos.map((todo) => (
-  //       <div key={todo._id} id={todo._id}>
-  //         <input
-  //           type="checkbox"
-  //           checked={todo.completed}
-  //           onChange={() => handleToggle(todo._id)}
-  //         />
-  //         <h3>{todo.time}</h3>
-  //         <p>{todo.task}</p>
-
-  //         <button onClick={() => handleDelete(todo._id)}>Delete</button>
-  //       </div>
-  //     ))}
-  //   </ul>
-  // );
 
   return (
-    <ul className="todo-list">
-      {todos.map(todo => (
-        <div key={todo._id} className="todo-item">
-          <input type="checkbox" checked={todo.completed} onChange={() => handleToggle(todo._id)} />
-          <span className="todo-time">{todo.time}</span>
-          <span className="todo-task">{todo.task}</span>
-          <button onClick={() => handleDelete(todo._id)}>Delete</button>
-        </div>
-      ))}
-    </ul>
+
+      <ul className="todo-list">
+        {todos.map(todo => (
+          <div key={todo._id} className="todo-item">
+            <input type="checkbox" checked={todo.completed} onChange={() => handleToggle(todo._id)} />
+            <span className="todo-time">{todo.time}</span>
+
+            <span className={`todo-task ${todo.completed ? 'completed-task' : ''}`}>{todo.task}</span>
+            <button className="delete-button" onClick={() => handleDelete(todo._id)}>Delete</button>
+          </div>
+        ))}
+      </ul>
+
   );
   
 };
@@ -77,6 +63,7 @@ Todo.propTypes = {
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
+
 };
 
 export default Todo;
