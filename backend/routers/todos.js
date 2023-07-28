@@ -5,9 +5,34 @@ import mongoose from 'mongoose';
 const router = express.Router();
 
 // GET /todos
+// router.get('/', async (req, res) => {
+//   try {
+//     const todos = await Todo.find();
+//     res.json(todos);
+//   } catch (error) {
+//     console.error('Error fetching todos:', error);
+//     res.status(500).json({ message: 'Unable to fetch todos' });
+//   }
+// });
+
+// GET /todos
 router.get('/', async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const { userID, place, day } = req.query;
+
+    // Build the query based on the provided query parameters
+    const query = {};
+    if (userID) {
+      query.userID = userID;
+    }
+    if (place) {
+      query.place = place;
+    }
+    if (day) {
+      query.day = parseInt(day, 10); // Convert the day string to a number
+    }
+
+    const todos = await Todo.find(query);
     res.json(todos);
   } catch (error) {
     console.error('Error fetching todos:', error);
@@ -15,9 +40,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // POST /todos
 router.post('/', async (req, res) => {
-  const { task, time } = req.body;
+  const { task, time, userID, place, day } = req.body;
   if (!task) {
     return res.status(400).json({ message: 'Task is required' });
   }
@@ -27,6 +53,9 @@ router.post('/', async (req, res) => {
       task,
       time: time || null,
       completed: false,
+      userID,
+      place,
+      day,
     });
     await newTodo.save();
     res.status(201).json(newTodo);

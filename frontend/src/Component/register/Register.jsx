@@ -83,7 +83,7 @@ function Register() {
 
     return (
         <div>
-            <div id={style.container}>
+  <div id={style.container}>
                 <div id={style.SignUpContainer}>
                     <div id={style.formContainer}>
 

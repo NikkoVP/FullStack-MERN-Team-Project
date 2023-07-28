@@ -1,4 +1,4 @@
-import style from "./login.module.css";
+ import style from "./login.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 function Login() {

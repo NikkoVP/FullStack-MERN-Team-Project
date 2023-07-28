@@ -13,6 +13,24 @@ const todoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  day: {
+    type: Number, // Assuming you want to use numbers for days (Day 1, Day 2, etc.)
+    // required: true,
+  },
+  place: {
+    type: String,
+    // required: true,
+  },
+  /* we will finalize once user model is available ,temporay use userID as String from Mock data */
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   // required: true,
+  // },
+  userID: {
+    type: String,
+    // required: true,
+  },
 });
 
 const Todo = mongoose.model('Todo', todoSchema);
