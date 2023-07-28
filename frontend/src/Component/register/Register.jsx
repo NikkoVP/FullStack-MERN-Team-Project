@@ -1,79 +1,127 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from './register.module.css';
 import { Link } from 'react-router-dom';
 function Register() {
 
-    const [userName, setuserName] = useState('');
+    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
-    const [password , setPassword] = useState('');
-//error message 
-const [emailLength, setUserLength] = useState(false)
+    const [password, setPassword] = useState('');
+    //error message 
+    const [userLength, setUserLength] = useState(false)
     const [passwordLength, setPasswordLength] = useState(false);
-//AlreadyRegister 
+    const [emailLength, setEmailLength] = useState('');
+    //AlreadyRegister 
+    const [userList, setUserList] = useState([]);
 
-    function signup (e) {
-e.preventDefault();
-console.log(`hello ${userName}`);
-console.log(userName)
-//USERNAME VALIDATION
-if(userName.length <= 5) {
-    setUserLength(true)
-}
-else {
-    setUserLength(false)
-}
 
-// PASSWORD VALIDATION
-if(password.length <=5) {
-    setPasswordLength(true)
-}
-else {
-    setPasswordLength(false)
-}
-//EMAIL VALIDATION  
+    // GET THE USERS
+    const fetchData = async () => {
+        const response = await fetch(`http://127.0.0.1:3000/users`)
+        const { data } = await response.json();
+        setUserList(data)
+    };
 
-    }
-    return ( 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const user = userList.filter((data) => {
+        if (data.username === userName) {
+            return data;
+        }
+    })
+
+    //   SIGNUP FUNCTION
+    function signup(e) {
+        e.preventDefault();
+        console.log(`hello ${userName}`);
+        console.log(userName)
+        //USERNAME VALIDATION
+        if (userName.length <= 5) {
+            setUserLength(true)
+        }
+        else {
+            setUserLength(false)
+        }
+
+        // PASSWORD VALIDATION
+        if (password.length <= 5) {
+            setPasswordLength(true)
+        }
+        else {
+            setPasswordLength(false)
+        }
+
+        if (userLength === false && passwordLength === false && emailLength !== ' ') {
+            const userData = {
+                username,
+                password,
+                email
+            }
+            console.log(user)
+            if (user.length === 0) {
+
+                fetch('http://127.0.0.1:3000/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        alert("Registration Successful!")
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            } else { alert("username taken") }
+        }
+    };
+
+
+    return (
         <div>
-             <div id={style.container}>
-<div id={style.SignUpContainer}>
-    <div id={style.formContainer}>
-        
-       <form onSubmit={signup}>
-       <h1>WanderList</h1>
-       <br />
-  <input type="Username" id="userName" placeholder="username" onChange={(e) => setuserName(e.target.value)} ></input>
-  <br />{emailLength?<span>Username should be atleast length of 6 character</span>:null}
-  <br />
-  <br />
-  <input type="email"  placeholder="email" onChange={(e) => setEmail(e.target.value)} required ></input>
-  <br/>
-  <br />
-  <br />
-  <input type="password"   placeholder="password" onChange={(e)=> setPassword(e.target.value)} ></input>
-  <br /> {passwordLength?<span>Password should be atleast of 6 character</span>:null}
-  <br />
-  <br />
-  <button type ='submit'id= {style.buttonSignUp}>SignUp</button>
-  <div id={style.line}></div>
-  <p id={style.mobileSignup}>Already have an account?<Link to='/login'>Login</Link></p>
-       </form>
-    </div>
+            <div id={style.container}>
+                <div id={style.SignUpContainer}>
+                    <div id={style.formContainer}>
 
-    <div id={style.welcome}>
-        <h1>
-        "Join Wanderlist to plan your dream trips <br/>
-effortlessly and explore personalized<br/>
- itineraries for your favorite destinations."<br/>
-        </h1>
- 
-    </div>
-  
-</div>
-<footer id={style.footer}>@WanderList</footer>
-</div>
+                        <form onSubmit={signup}>
+                            <h1>WanderList</h1>
+                            <br />
+                            <input type="Username" id="userName" placeholder="username" onChange={(e) => setUserName(e.target.value)} ></input>
+                            <br />{userLength ? <span>Username should be atleast length of 6 character</span> : null}
+                            <br />
+                            <br />
+                            <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} ></input>
+                            <br />{passwordLength ? <span>Password should be atleast of 6 character</span> : null}
+                            <br />
+                            <br />
+                            <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} required ></input>
+                            <br />
+                            <br />
+                            <br />
+                            <button type='submit' id={style.buttonSignUp}>SignUp</button>
+                            <div id={style.line}></div>
+                            <p id={style.mobileSignup}>Already have an account?<Link to='/'>Login</Link></p>
+                        </form>
+                    </div>
+
+                    <div id={style.welcome}>
+                        <h1>
+                            "Join Wanderlist to plan your dream trips <br />
+                            effortlessly and explore personalized<br />
+                            itineraries for your favorite destinations."<br />
+                        </h1>
+
+                    </div>
+
+                </div>
+                <footer id={style.footer}>@WanderList</footer>
+            </div>
         </div>
-     );
+    );
 }
 
 export default Register;
