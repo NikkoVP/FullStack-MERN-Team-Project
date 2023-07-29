@@ -5,12 +5,12 @@ import HomePage from '../homepage/Homepage';
 const router = createBrowserRouter([
     {
         path:'/',
-        element:'',
+        element:<Login/>,
     },
     
     {
-        path:'/login',
-        element:<Login/>
+        path:'/homepage',
+        element:<HomePage />
     },
 
     {
