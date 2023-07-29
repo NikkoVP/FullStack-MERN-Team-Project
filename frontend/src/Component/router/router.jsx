@@ -2,7 +2,10 @@ import {createBrowserRouter} from 'react-router-dom';
 import Login from '../login/Login';
 import Register from '../register/Register';
 import HomePage from '../homepage/Homepage';
+
+import Itinerary from '../ItineraryComponent/Itinerary';
 import Todo from '../todoComponent/Todo';
+
 const router = createBrowserRouter([
     {
         path:'/',
@@ -22,6 +25,12 @@ const router = createBrowserRouter([
         path:'/home',
         element:<HomePage/>
     },
-  
+
+    {
+        path:'/todos/:place',
+        element:<Itinerary/>
+    }
+
+
 ])
 export default router;

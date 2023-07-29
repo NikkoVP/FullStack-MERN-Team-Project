@@ -175,8 +175,37 @@ const mapList =  displayPlace.map((item) => (
         {/* List  of  API  */}
         
         <div id={style.list}>
+
+          <h1>List of Schedule</h1>
+          <div id={style.yourPlace}>
+            <ul>
+              {displayPlace.map((item) => (
+                <li key={item._id}>
+                  {/* Display the data properties here */}
+                  <h1><Link to={{
+                      pathname: `/todos/${item.place}`,
+                      state: {
+                        user: item.user,
+                        place: item.place,
+                        fromDate: item.fromDate,
+                        toDate: item.toDate,
+                      },
+                    }}
+                  >{item.place}</Link></h1>
+                  <p>From : {item.fromDate}</p>
+                  <p>To : {item.toDate}</p>
+                  {/* Add other properties as needed */}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <br />
+
         <h1>List of Schedule</h1>
        <div id={style.flexMap}>{mapList}</div> 
+
     </div>
 </div>
 </div>

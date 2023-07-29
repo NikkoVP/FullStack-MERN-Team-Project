@@ -76,6 +76,7 @@ body {
 .todo-task {
   flex: 1;
   font-size: 16px;
+  color: #050f06;
 }
 /* Add style for completed task */
 .completed-task {
