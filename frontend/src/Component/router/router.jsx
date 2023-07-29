@@ -4,7 +4,7 @@ import Register from '../register/Register';
 import HomePage from '../homepage/Homepage';
 
 import Itinerary from '../ItineraryComponent/Itinerary';
-import Todo from '../todoComponent/Todo';
+
 
 const router = createBrowserRouter([
     {
