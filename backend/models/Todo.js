@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import { Types } from 'mongoose';
+import User from './userModel.js';
+import Place from './placeModel.js';
+
 
 const todoSchema = new mongoose.Schema({
   time: {
@@ -14,22 +18,15 @@ const todoSchema = new mongoose.Schema({
     default: false,
   },
   day: {
-    type: Number, // Assuming you want to use numbers for days (Day 1, Day 2, etc.)
-    // required: true,
+    type: Number, 
   },
   place: {
     type: String,
-    // required: true,
+    ref: 'Place',
   },
-  /* we will finalize once user model is available ,temporay use userID as String from Mock data */
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   // required: true,
-  // },
   userID: {
-    type: String,
-    // required: true,
+    type: Types.ObjectId,
+    ref: 'User',
   },
 });
 
