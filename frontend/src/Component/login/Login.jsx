@@ -1,12 +1,21 @@
  import style from "./login.module.css";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
+
+    useEffect(() => {
+        // Clean up local storage data when component unmounts
+        return () => {
+          localStorage.getItem('UserID') !== null ? localStorage.removeItem('UserID') : console.log("no userID");
+          localStorage.getItem('token') != null ? localStorage.removeItem('token') : console.log("no token");
+        };
+    
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +44,7 @@ function Login() {
                 });
 
                 const data = await response.json();
+               
 
                 if (response.ok) {
                     const { token } = data;
@@ -52,7 +62,7 @@ function Login() {
                         .then((data) => {
                             localStorage.setItem('UserID', data);
                             window.location.href = '/Homepage';
-
+                        
                         })
                         .catch((error) => {
                             console.error(data.error);

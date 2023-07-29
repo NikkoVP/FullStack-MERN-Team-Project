@@ -6,14 +6,20 @@ const router = express.Router();
 // ADD PLACE
 router.post('/addPlace', async (req, res) => {
   try {
-    const { user,place, fromDate, toDate } = req.body;
+    const { user, place, fromDate, toDate } = req.body;
 
     const newPlace = new Place({
       user: user,
       place: place,
-      fromDate:fromDate,
-      toDate:toDate
+      fromDate: fromDate,
+      toDate: toDate
     });
+
+    const overlappingReservations = await Place.find({
+      fromDate: { $lt: new Date(fromDate) },
+      toDate: { $gt: new Date(toDate) }
+    });
+    
 
     await newPlace.save();
 
@@ -33,6 +39,18 @@ router.get("/showPlace", async (req, res) => {
   const place = await Place.find();
   res.send({ data: place })
 
+});
+
+
+// GET ALL DATES
+router.get('/dates', async (req, res) => {
+  try {
+    const dates = await Place.find({}, 'fromDate toDate');
+    res.json({dates});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 export default router;

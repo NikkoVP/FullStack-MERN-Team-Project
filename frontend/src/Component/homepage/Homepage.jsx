@@ -1,14 +1,67 @@
 import style from "./home.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaEye} from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 
 function HomePage() {
   const [place, setPlace] = useState("");
   const [toDate, setToDate] = useState("");
   const [fromDate, setFromDate] = useState("");
+  const [placeData, setPlaceData] = useState([]);
+  const [isAvailable, setIsAvailable] = useState(false);
 
-  function add(e) {
+  
+  const user = localStorage.getItem('UserID');
+  let displayPlace = [];
+  displayPlace = placeData.filter((obj) => {
+    if (obj.user === user) {
+      return obj;
+    }
+  })
+ 
+  const [displayName, setDisplayName] = useState([]);
+  const name = displayName.filter((showname) => {
+
+    if (showname._id === user) {
+      return showname;
+    }
+  });
+
+  
+  const fetchData = async () => {
+
+    const response = await fetch(`http://127.0.0.1:3000/users`)
+    const { data } = await response.json();
+    setDisplayName(data)
+  };
+
+  const fetchDataPlace = async () => {
+
+    const response = await fetch(`http://127.0.0.1:3000/showPlace`)
+    const { data } = await response.json();
+    setPlaceData(data);
+    
+  };
+
+
+
+
+  useEffect(() => {
+    fetchData();
+    fetchDataPlace();
+  }, []);
+
+
+// CHECK IF THE PLACE ALREADY EXISTS IN THE DB
+  const checkPlace = placeData.filter((data) => {
+    if (data.place === place) {
+      return data;
+    }
+  });
+
+
+  // SUBMIT BUTTON
+  function handleSubmitPlace(e) {
     let hasError = false;
 
     e.preventDefault();
@@ -21,53 +74,80 @@ function HomePage() {
       alert("please select the end date");
       hasError = true;
     }
-
+   
     if (!hasError) {
-      alert(`Your schedule for ${place} will be on ${fromDate} to ${toDate} `);
-      console.log(
-        `Your schedule for ${place} will be on ${fromDate} to ${toDate} `
-      );
-    } else {
-      alert("Form submission not successful");
+      const inputPlaceData = {
+       user,
+        place,
+        fromDate,
+        toDate
+      }
+      if (checkPlace.length === 0) {
+
+        fetch('http://127.0.0.1:3000/addPlace', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(inputPlaceData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+          setIsAvailable(data)
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else { alert("Place Already Exist!") }
     }
-  }
+
+    if(isAvailable){
+      alert("Dates are not available");
+    }else{
+      alert("New Place Added")
+    }
+    console.log(isAvailable)
+  };
+
+  
 
   return (
     <div>
-      <header id={style.header}>Hello, User</header>
+      <header id={style.header}>Hello, {name.map((data) => data.username)}</header>
       <div id={style.container}>
         {/* ADD your itinerary */}
         <div id={style.addPlace}>
-       
-        <div id={style.form}>
-          <form onSubmit={add}>
-            <div>
-            <h2>Add Place and Date</h2>
-              <input
-                type="text"
-                placeholder="Add Place"
-                onChange={(e) => setPlace(e.target.value)}
-              />
-              <br />
-              <br />
-              <label>From Date:</label>
-              <br />
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-              <br />
-              <br />
-              <label>To Date:</label>
-              <br />
-              <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
-              <br />
-              <br />
-              <button type="submit" id={style.buttonSubmit}>Submit</button>
-              
-            </div>
-          </form>
+
+          <div id={style.form}>
+            <form onSubmit={handleSubmitPlace}>
+              <div>
+                <h2>Add Place and Date</h2>
+                <input
+                  type="text"
+                  placeholder="Add Place"
+                  onChange={(e) => setPlace(e.target.value)}
+                />
+                <br />
+                <br />
+                <label>From Date:</label>
+                <br />
+                <input
+                  type="date"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                />
+                <br />
+                <br />
+                <label>To Date:</label>
+                <br />
+                <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+                <br />
+                <br />
+                <button type="submit" id={style.buttonSubmit}>Submit</button>
+
+              </div>
+            </form>
           </div>
         </div>
 
@@ -76,23 +156,24 @@ function HomePage() {
         <div id={style.list}>
           <h1>List of Schedule</h1>
           <div id={style.yourPlace}>
-            <h1>PLaceHere</h1>
-            <h2>
-              Date:
-              </h2>
-              <h2> 2023-07-05 from 2023-07-17</h2>
-               <br />
-            <div id={style.seeMore}>
-              <Link to="./link" id={style.link}>
-            <FaEye/>
-              </Link>
-            </div>
+            <ul>
+              {displayPlace.map((item) => (
+                <li key={item._id}>
+                  {/* Display the data properties here */}
+                  <h1><a href="/">{item.place}</a></h1>
+                  <p>From : {item.fromDate}</p>
+                  <p>To : {item.toDate}</p>
+                  {/* Add other properties as needed */}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <br />
-         
       </div>
+      <br />
+
     </div>
+
   );
 }
 

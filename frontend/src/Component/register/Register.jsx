@@ -26,7 +26,7 @@ function Register() {
     }, []);
 
     const user = userList.filter((data) => {
-        if (data.username === userName) {
+        if (data.username === username) {
             return data;
         }
     })
@@ -34,10 +34,10 @@ function Register() {
     //   SIGNUP FUNCTION
     function signup(e) {
         e.preventDefault();
-        console.log(`hello ${userName}`);
-        console.log(userName)
+        console.log(`hello ${username}`);
+        console.log(username)
         //USERNAME VALIDATION
-        if (userName.length <= 5) {
+        if (username.length <= 5) {
             setUserLength(true)
         }
         else {

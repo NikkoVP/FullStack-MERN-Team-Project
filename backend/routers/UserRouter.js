@@ -93,7 +93,7 @@ router.get('/protected', async (req, res) => {
     const userID = payload.userID;
 
     // You can use the userID to fetch user-specific data or perform any other actions
-    res.status(200).json({ userID });
+    res.status(200).json( userID );
   } catch (error) {
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ message: 'Invalid token' });
@@ -103,4 +103,15 @@ router.get('/protected', async (req, res) => {
   }
 });
 
+
+//  GET ALL THE USERS
+// Get the User Name
+router.get("/users", async (req, res) => {
+
+  const name = await User.find();
+
+
+  res.send({ data: name })
+
+})
 export default router;
