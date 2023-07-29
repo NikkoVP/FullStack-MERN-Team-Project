@@ -2,6 +2,8 @@ import style from "./home.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaEye } from 'react-icons/fa';
+import { FaBeer } from 'react-icons/fa';
+import {FaEdit} from 'react-icons/fa'
 
 function HomePage() {
   const [place, setPlace] = useState("");
@@ -110,7 +112,25 @@ function HomePage() {
     console.log(isAvailable)
   };
 
+  //for LIST OF itineraries
+const mapList =  displayPlace.map((item) => (
+  <div key={item._id} id={style.yourPlace}>
+    <div>
+    {/* Display the data properties here */}
+    <h1><a href="/">{item.place}</a></h1>
+    <h2>From : {item.fromDate}</h2>
+    <h2>To : {item.toDate}</h2>
+    {/* Add other properties as needed */}
   
+    <div>
+      <button id={style.editButton}><FaEdit/></button>
+      <button id={style.deleteButton}><FaBeer/></button>
+     <Link to='/todo'><button id={style.seeTodoButton}><FaEye/></button></Link>
+    </div>
+  </div>
+  </div>
+));
+
 
   return (
     <div>
@@ -153,7 +173,9 @@ function HomePage() {
 
         <div id={style.line}></div>
         {/* List  of  API  */}
+        
         <div id={style.list}>
+
           <h1>List of Schedule</h1>
           <div id={style.yourPlace}>
             <ul>
@@ -181,8 +203,12 @@ function HomePage() {
       </div>
       <br />
 
-    </div>
+        <h1>List of Schedule</h1>
+       <div id={style.flexMap}>{mapList}</div> 
 
+    </div>
+</div>
+</div>
   );
 }
 
