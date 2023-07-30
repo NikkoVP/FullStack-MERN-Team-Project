@@ -8,10 +8,12 @@
   font-family: "Inter", sans-serif;
   color: #050f06;
 
-  background-image: url('../images/background.png');
+ 
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
 
 /* Styling for the heading */
 .itinerary-heading {

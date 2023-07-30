@@ -12,11 +12,11 @@ const placeSchema = new mongoose.Schema({
     default: null,
   },  
   fromDate: {
-    type: String,
+    type: Date,
     default:null,
   },
   toDate: {
-    type: String,
+    type: Date,
     default: null,
   },
 });

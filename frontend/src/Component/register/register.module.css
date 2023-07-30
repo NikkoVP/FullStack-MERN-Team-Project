@@ -81,7 +81,7 @@ body {
 #SignUpContainer {
   display: flex;
   width: 100%; 
-  
+  justify-content: center;
 }
 #line {
   display: none;
