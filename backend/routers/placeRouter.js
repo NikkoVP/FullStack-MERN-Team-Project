@@ -53,4 +53,19 @@ router.get('/dates', async (req, res) => {
   }
 });
 
+//DELETE PLACE
+router.delete("/deletePlace/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedPlace = await Place.deleteOne({ _id: id });
+
+    res.send({
+      message: 'Delete Successful',
+      data: deletedPlace,
+    });
+  } catch (error) {
+    console.error('Error deleting Transaction', error)
+  }
+});
+
 export default router;

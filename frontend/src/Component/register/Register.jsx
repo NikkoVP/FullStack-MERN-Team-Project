@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import style from './register.module.css';
 import { Link } from 'react-router-dom';
+import Logo from './wanderlist (1).png';
 function Register() {
 
     const [username, setUserName] = useState('');
@@ -71,13 +72,15 @@ function Register() {
                     .then((response) => response.json())
                     .then((data) => {
                         console.log(data);
-                        alert("Registration Successful!")
+                        alert("Registration Successful!");
+                        window.location.href= '/';
                     })
                     .catch((error) => {
                         console.error(error);
                     });
             } else { alert("username taken") }
         }
+        
     };
 
 
@@ -88,7 +91,7 @@ function Register() {
                     <div id={style.formContainer}>
 
                         <form onSubmit={signup}>
-                            <h1>WanderList</h1>
+                            <h1>Registration</h1>
                             <br />
                             <input type="Username" id="userName" placeholder="username" onChange={(e) => setUserName(e.target.value)} ></input>
                             <br />{userLength ? <span>Username should be atleast length of 6 character</span> : null}
@@ -104,16 +107,12 @@ function Register() {
                             <br />
                             <button type='submit' id={style.buttonSignUp}>SignUp</button>
                             <div id={style.line}></div>
-                            <p id={style.mobileSignup}>Already have an account?<Link to='/'>Login</Link></p>
+                            <p >Already have an account?<Link to='/'>Login</Link></p>
                         </form>
                     </div>
 
                     <div id={style.welcome}>
-                        <h1>
-                            "Join Wanderlist to plan your dream trips <br />
-                            effortlessly and explore personalized<br />
-                            itineraries for your favorite destinations."<br />
-                        </h1>
+                    
 
                     </div>
 

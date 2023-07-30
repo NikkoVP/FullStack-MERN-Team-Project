@@ -1,6 +1,7 @@
  import style from "./login.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect} from "react";
+import Logo from './wanderlist (1).png';
 function Login() {
 
     const [username, setUsername] = useState('');
@@ -83,7 +84,7 @@ function Login() {
                 <div id={style.formContainer}>
 
                     <form onSubmit={handleSubmit}>
-                        <h1>WanderList</h1>
+                    <div> <img className="imgLogo" src={Logo} alt="Logo" style={{height:"30vh", borderRadius:"20px"}} /></div>
                         <br />
                         <input type="Username" placeholder="username" onChange={(e) => setUsername(e.target.value)}></input>
                         <br /> <div className="errorLabel"> {errorUsername && <label>Enter  Username!</label>}</div>
@@ -93,17 +94,15 @@ function Login() {
                         <br />  <div className="errorLabel"> {errorPassword && <label>Enter  Password!</label>}</div>
                         <br />
                         <button id={style.buttonLogin} type="submit" className="loginButton">Login</button>
+                        <p>Dont have an account? <Link to='/register'>Sign Up</Link></p>
                         <div id={style.line}></div>
-                        <p id={style.mobileSignup}>Dont have an account? <Link to='/register'>Sign Up</Link></p>
+                        
                     </form>
                 </div>
 
                 <div id={style.welcome}>
-                    <h1>
-                        Welcome To Wanderlist ! <br />
-                        Start Planning Your Day.
-                    </h1>
-                    {/*  */}
+                 <div> <img className="imgLogo" src={Logo} alt="Logo" /></div>
+                 <div><p id={style.mobileSignup}>Dont have an account? <Link to='/register'>Sign Up</Link></p></div>
                 </div>
 
             </div>
