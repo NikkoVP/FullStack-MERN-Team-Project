@@ -22,8 +22,8 @@ const Itinerary = () => {
         const response = await fetch(`http://localhost:3000/showPlace?place=${place}`);
         if (response.ok) {
           const { data } = await response.json();
-          // Find the place data that matches the specified 'place' parameter
-          const foundPlaceData = data.find((item) => item.place === place);
+          // Find the place data that matches the specified 'place' parameter and userID
+          const foundPlaceData = data.find((item) => item.place === place && item.user === localStorage.getItem('UserID'));
           if (foundPlaceData) {
             setPlaceData(foundPlaceData);
           } else {
@@ -55,7 +55,7 @@ const Itinerary = () => {
   // Convert the fromDate and toDate to Date objects
   const fromDateObj = new Date(fromDate);
   const toDateObj = new Date(toDate);
-
+  console.log(user);
   console.log(fromDate);
   console.log(toDate);
 
