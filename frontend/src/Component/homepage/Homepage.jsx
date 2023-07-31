@@ -173,7 +173,7 @@ function HomePage() {
 
   return (
     <div>
-      <header id={style.header}>Hello, {name.map((data) => data.username)} <a href="/" style={{ fontSize: "20px", color: " white", border: "solid 2px", borderRadius: "20px", backgroundColor:"#79C853", padding: "8px" }}>Logout</a></header>
+      <header id={style.header}>Hello, {name.map((data) => data.username)} <a href="/" style={{ fontSize: "20px", color: " #0c0c0c", border: "solid 2px", borderRadius: "20px", backgroundColor:"#79C853", padding: "8px" }}>Logout</a></header>
       <div id={style.container}>
         {/* ADD your itinerary */}
         <div id={style.addPlace}>
@@ -181,7 +181,7 @@ function HomePage() {
           <div id={style.form}>
             <form onSubmit={handleSubmitPlace}>
               <div>
-                <h2 style={{ color: "White" }}>Add Place and Date</h2>
+                <h3 style={{ color: "#0c0c0c" }}>Add Place and Date</h3>
                 <input
                   type="text"
                   placeholder="Add Place"
@@ -189,7 +189,7 @@ function HomePage() {
                 />
                 <br />
                 <br />
-                <label style={{ color: "White", fontSize: "18px" }} >From :</label>
+                <label style={{ color: "#0c0c0c", fontSize: "18px" }} >From :</label>
                 <br />
                 <input
                   type="date"
@@ -198,7 +198,7 @@ function HomePage() {
                 />
                 <br />
                 <br />
-                <label style={{ color: "White", fontSize: "18px" }}>To:</label>
+                <label style={{ color: "#0c0c0c", fontSize: "18px" }}>To:</label>
                 <br />
                 <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
                 <br />
